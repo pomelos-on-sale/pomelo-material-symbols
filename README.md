@@ -85,9 +85,10 @@ feature would only be a way for an ordinary `text(..)` to be rewritten behind it
 
 ## Regenerating
 
-This crate is self-contained: nothing in it reads the `pomelo-os` checkout it is a submodule of, and
-the only thing its tool needs is `fontTools`. Download the upstream files into `fonts/source/` (the
-exact `curl`s are in [`tools/bake_icons.py`](tools/bake_icons.py)'s header), then:
+This crate is self-contained: it reads nothing out of `pomelo-os`, which consumes it as a git
+dependency pinned by revision rather than as a checkout, and the only thing its tool needs is
+`fontTools`. Download the upstream files into `fonts/source/` (the exact `curl`s are in
+[`tools/bake_icons.py`](tools/bake_icons.py)'s header), then:
 
 ```bash
 python3 tools/bake_icons.py                    # rebake the font and regenerate src/table.rs
