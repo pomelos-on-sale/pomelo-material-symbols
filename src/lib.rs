@@ -17,9 +17,9 @@
 //!
 //! A pinned, instanced cut of Material Symbols Outlined, in the spirit of a `-sys` crate: the
 //! font's bytes, the numbers that say which cut this is, and just enough Rust to name one icon.
-//! The provenance is in `fonts/README.md` and the figures are in `fonts/MANIFEST.md`; both are
-//! part of what this repository is for, because a font that cannot say where it came from cannot
-//! be rebaked.
+//! The provenance is in `README.md`'s *Regenerating* section and the figures are in
+//! `fonts/MANIFEST.md`; both are part of what this repository is for, because a font that cannot
+//! say where it came from cannot be rebaked.
 //!
 //! # Why an icon is a glyph
 //!
