@@ -91,17 +91,33 @@ mod tests {
 
     /// The icons this OS draws, and the code points they must have.
     ///
-    /// Not exhaustive -- the table has 4 299 entries and no way to walk them -- but it pins the
-    /// ones with call sites, so a rebake that silently moved or renamed something is a red build
-    /// rather than four wrong pictures on the panel.
+    /// Not exhaustive -- the table has 4 299 entries and no way to walk them -- but it pins every
+    /// one with a call site, so a rebake that silently moved or renamed something is a red build
+    /// rather than a wrong picture on the panel. An icon that stops being drawn should be taken out:
+    /// a list that only grows stops saying what the OS uses.
     const USED: &[(Icon, char)] = &[
+        // The launcher's tiles.
         (Icon::TERMINAL, '\u{eb8e}'),
         (Icon::CALCULATE, '\u{ea5f}'),
+        (Icon::COUNTER_0, '\u{f785}'),
+        (Icon::WAVING_HAND, '\u{e766}'),
         (Icon::SETTINGS, '\u{e8b8}'),
         (Icon::MUSIC_NOTE, '\u{e405}'),
-        (Icon::WIFI, '\u{e63e}'),
+        // The status bar's signal: a staircase of arcs, one bar at a time. The three share their
+        // bottom anchor, which is how the dot stays put as the arcs come and go.
         (Icon::WIFI_OFF, '\u{e648}'),
-        (Icon::BATTERY_FULL, '\u{e1a5}'),
+        (Icon::WIFI_1_BAR, '\u{e4ca}'),
+        (Icon::WIFI_2_BAR, '\u{e4d9}'),
+        (Icon::WIFI, '\u{e63e}'),
+        // ...and its battery, which climbs through seven steps and then full.
+        (Icon::BATTERY_ANDROID_0, '\u{f30d}'),
+        (Icon::BATTERY_ANDROID_1, '\u{f30c}'),
+        (Icon::BATTERY_ANDROID_2, '\u{f30b}'),
+        (Icon::BATTERY_ANDROID_3, '\u{f30a}'),
+        (Icon::BATTERY_ANDROID_4, '\u{f309}'),
+        (Icon::BATTERY_ANDROID_5, '\u{f308}'),
+        (Icon::BATTERY_ANDROID_6, '\u{f307}'),
+        (Icon::BATTERY_ANDROID_FULL, '\u{f304}'),
     ];
 
     /// [`FONT`] is a font, it is the family [`font`] asks for, and it is the one [`table`] was
