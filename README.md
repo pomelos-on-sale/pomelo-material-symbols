@@ -44,6 +44,12 @@ That last line is not luck. `iced_graphics::text::FontSystem::load_font` used to
 ecosystem builds against drops that ([`e7d6194c1`](https://github.com/pomelos-on-sale/iced), and the
 measurement behind it was this crate's font: the font database went from 1 798 122 B to 14 698 B).
 
+What is **not** in the font is the 406 code points upstream maps that no icon has: 66 ASCII
+placeholder glyphs (upstream's type-the-name ligatures need them) and 339 code points kept for
+backwards compatibility with Material Icons. Nothing can name them — there is no `Icon` const for a
+code point upstream has no name for — so they would be 381 KB of flash nothing could draw
+(1 160 KB → 777 KB). That is what the tool's subsetting step does, and the only thing it does.
+
 ## The axes are pinned, and here
 
 iced has no way to set `font-variation-settings` per draw, so a variable font has to be instanced on
@@ -79,13 +85,13 @@ feature would only be a way for an ordinary `text(..)` to be rewritten behind it
 
 ## Regenerating
 
-The upstream files are not committed (10.7 MB, one command — the exact `curl`s are in
-[`tools/bake_icons.py`](https://github.com/pomelos-on-sale/pomelo-os/blob/main/tools/bake_icons.py)'s
-header, in the `pomelo-os` repository this crate is a submodule of):
+This crate is self-contained: nothing in it reads the `pomelo-os` checkout it is a submodule of, and
+the only thing its tool needs is `fontTools`. Download the upstream files into `fonts/source/` (the
+exact `curl`s are in [`tools/bake_icons.py`](tools/bake_icons.py)'s header), then:
 
 ```bash
-python3 tools/bake_icons.py            # rebake the font and regenerate src/table.rs
-python3 tools/bake_icons.py --check    # is what is committed what the tool would produce?
+python3 tools/bake_icons.py                    # rebake the font and regenerate src/table.rs
+python3 tools/bake_icons.py --check            # is what is committed what the tool would produce?
 python3 tools/bake_icons.py --search battery   # which names does upstream have?
 ```
 
