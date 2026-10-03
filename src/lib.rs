@@ -85,6 +85,33 @@ pub const fn font() -> iced_core::Font {
     iced_core::Font::with_name(FAMILY)
 }
 
+use std::borrow::Cow;
+use std::fmt;
+
+impl fmt::Display for Icon {
+    fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
+        f.write_str(self.glyph())
+    }
+}
+
+impl<'a> From<Icon> for Cow<'a, str> {
+    fn from(icon: Icon) -> Self {
+        Cow::Borrowed(icon.glyph())
+    }
+}
+
+impl From<Icon> for &'static str {
+    fn from(icon: Icon) -> Self {
+        icon.glyph()
+    }
+}
+
+impl From<Icon> for char {
+    fn from(icon: Icon) -> Self {
+        icon.codepoint()
+    }
+}
+
 #[cfg(test)]
 mod tests {
     use super::*;
