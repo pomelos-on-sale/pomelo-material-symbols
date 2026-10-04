@@ -145,6 +145,7 @@ mod tests {
         (Icon::BATTERY_ANDROID_5, '\u{f308}'),
         (Icon::BATTERY_ANDROID_6, '\u{f307}'),
         (Icon::BATTERY_ANDROID_FULL, '\u{f304}'),
+        (Icon::BATTERY_ANDROID_FRAME_BOLT, '\u{f250}'),
     ];
 
     /// [`FONT`] is a font, it is the family [`font`] asks for, and it is the one [`table`] was
